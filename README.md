@@ -275,8 +275,12 @@ Select Kind = Username with password.
 ## Test
 1. Commit & push a small change to your repo (e.g., update app.js message).
 2. GitHub → Sends webhook → Jenkins job auto-triggers.
-3. Jenkins builds Docker image + runs container on EC2.
-4. Access app at:
+3. Jenkins builds Docker image + runs container on EC2 And push the image into the docker hub
+                  ![image](images/tok3.png)
+
+     ![image](images/tok2.png)
+
+5. Access app at:
 ```
 http://<EC2-Public-IP>:4000
 ```
