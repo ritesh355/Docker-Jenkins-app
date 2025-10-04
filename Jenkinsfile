@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git branch: 'main', url: 'https://github.com/ritesh355/docker-jenkins-app.git'
+                git branch: 'main', url: 'https://github.com/ritesh355/Docker-Jenkins-app.git'
             }
         }
 
@@ -19,13 +19,12 @@ pipeline {
         stage('Run Container') {
             steps {
                 script {
-                    // Stop & remove if already running
+                    // Stop & remove old container if running
                     sh 'docker stop docker-jenkins-app || true && docker rm docker-jenkins-app || true'
-                    // Run new container
-                    sh 'docker run -d --name docker-jenkins-app -p 3000:3000 docker-jenkins-app:latest'
+                    // Run new container on port 4000
+                    sh 'docker run -d --name docker-jenkins-app -p 4000:3000 docker-jenkins-app:latest'
                 }
             }
         }
     }
 }
-
