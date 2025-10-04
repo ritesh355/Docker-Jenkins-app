@@ -27,20 +27,24 @@ pipeline {
     }
 
     post {
-        success {
-            emailext(
-                subject: "Jenkins Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: "Good news! Build ${env.BUILD_NUMBER} succeeded.\nCheck details: ${env.BUILD_URL}",
-                to: "riteshsingh86991@gmail.com"
-            )
-        }
-        failure {
-            emailext(
-                subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: "Oops! Build ${env.BUILD_NUMBER} failed.\nCheck details: ${env.BUILD_URL}",
-                to: "riteshsingh86991@gmail.com"
-            )
-        }
+    success {
+        emailext(
+            subject: "✅ Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: "Build succeeded!\n\nURL: ${env.BUILD_URL}",
+            to: "riteshsingh86991@gmail.com",
+            from: "riteshsingh86991@gmail.com"
+        )
     }
+        
+    failure {
+        emailext(
+            subject: "❌ Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+            body: "Build failed!\n\nURL: ${env.BUILD_URL}",
+            to: "riteshsingh86991@gmail.com",
+            from: "riteshsingh86991@gmail.com"
+        )
+    }
+}
+
 }
 
