@@ -1,7 +1,29 @@
 ![image](images/docker-jenkin.png) 
+# 🚀 Jenkins CI/CD Pipeline with Docker & Node.js
 
+This project demonstrates a **Jenkins CI/CD pipeline** running on **AWS EC2**, which builds and deploys a simple **Node.js app** inside a **Docker container**, and pushes the image to **Docker Hub**.
 
-# First Setting Up Jenkins on an AWS EC2 Instance
+## 📌 Features
+
+* Node.js sample app (`Hello from Jenkins CI/CD + Docker + Node.js!`)
+* Jenkins pipeline using **Jenkinsfile**
+* Automated build & deployment with Docker
+* Push Docker images to Docker Hub
+* GitHub Webhook integration for auto builds
+
+---
+## 🛠️ Tech Stack
+
+* **Node.js** – Application
+* **Docker** – Containerization
+* **Jenkins** – CI/CD pipeline
+* **AWS EC2** – Jenkins & Docker host
+* **Docker Hub** – Image registry
+* **GitHub** – Source code repository
+
+---
+
+## First Setting Up Jenkins on an AWS EC2 Instance
 
 This guide provides step-by-step instructions to launch an AWS EC2 instance, install Jenkins, and access the Jenkins server. Follow these steps to set up a Jenkins server using Amazon Linux 2 on a `t2.micro` instance.
 
@@ -195,11 +217,15 @@ sudo systemctl restart jenkins
   ---
   ##  Create a GitHub Repository
   ### Folder structure 
-  docker-jenkins-app/
- ├── app.js
- ├── package.json
- ├── Dockerfile
- ├── Jenkinsfile
+ ```
+Docker-Jenkins-app/
+│-- app.js
+│-- package.json
+│-- Dockerfile
+│-- Jenkinsfile
+│-- README.md
+```
+
 
 ---
 ## Configure Jenkins Pipeline
