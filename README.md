@@ -83,6 +83,7 @@ This guide provides step-by-step instructions to launch an AWS EC2 instance, ins
    ssh -i "jenkins-key.pem" ec2-user@<Public_IP_or_DNS>
 
    ```
+   
     ![image](images/ubu1.png)
   -   Replace <Public_IP_or_DNS> with the instance’s public IP or DNS (found in instance details).
   - Ensure the .pem file permissions are restricted:
@@ -240,19 +241,28 @@ Open Jenkins Dashboard → Manage Jenkins → Credentials.
 
 Click System → Global credentials (unrestricted) → Add Credentials.
          ![image](images/ced2.png)
-           ![image](images/cread3.png)
+           ![image](images/cred3.png)
 
 
 Select Kind = Username with password.
+           ![image](images/cred4.png)
+
  - Username = Your Docker Hub username
 
 - Password = Your Docker Hub password or personal access token
+   how to create docker hub tokens
+             ![image](images/tok1.png)
+      ![image](images/tok2.png)
+               ![image](images/tok3.png)
+
+
+
 
 - ID = dockerhub-creds (you will use this ID in Jenkinsfile)
 
 - Description = Docker Hub Credentials
 
-    ![image](images/cread4.png)
+    ![image](images/cred5.png)
 
   
 ---
