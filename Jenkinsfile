@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        HOST_PORT = '4000'  // Change if needed, or pass dynamically
+        HOST_PORT = '4000'
     }
 
     stages {
@@ -14,21 +14,33 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                script {
-                    sh 'docker build -t docker-jenkins-app:latest .'
-                }
+                sh 'docker build -t docker-jenkins-app:latest .'
             }
         }
 
         stage('Run Container') {
             steps {
-                script {
-                    // Stop & remove old container if exists
-                    sh 'docker stop docker-jenkins-app || true && docker rm docker-jenkins-app || true'
-                    // Run new container with dynamic host port
-                    sh "docker run -d --name docker-jenkins-app -p ${HOST_PORT}:3000 docker-jenkins-app:latest"
-                }
+                sh 'docker stop docker-jenkins-app || true && docker rm docker-jenkins-app || true'
+                sh "docker run -d --name docker-jenkins-app -p ${HOST_PORT}:3000 docker-jenkins-app:latest"
             }
         }
     }
+
+    post {
+        success {
+            emailext(
+                subject: "Jenkins Build Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: "Good news! Build ${env.BUILD_NUMBER} succeeded.\nCheck details: ${env.BUILD_URL}",
+                to: "riteshsingh86991@gmail.com"
+            )
+        }
+        failure {
+            emailext(
+                subject: "Jenkins Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: "Oops! Build ${env.BUILD_NUMBER} failed.\nCheck details: ${env.BUILD_URL}",
+                to: "riteshsingh86991@gmail.com"
+            )
+        }
+    }
 }
+
