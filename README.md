@@ -84,7 +84,7 @@ This guide provides step-by-step instructions to launch an AWS EC2 instance, ins
 
    ```
    
-    ![image](images/ubu1.png)
+    ![image](images/ubu-1.png)
   -   Replace <Public_IP_or_DNS> with the instance’s public IP or DNS (found in instance details).
   - Ensure the .pem file permissions are restricted:
 
@@ -95,19 +95,19 @@ This guide provides step-by-step instructions to launch an AWS EC2 instance, ins
  ```
 sudo apt update -y
 ```
-  ![image](images/ubu2.png)
+  ![image](images/ubu-2.png)
 
-  ---
+  
 
 
  - Install Java (Jenkins needs Java)
  ```
 sudo apt install openjdk-17-jdk -y
 ```
- ![image](images/ubu3.png)
-    ![image](images/ubu4.png)
+ ![image](images/ubu-3.png)
+    ![image](images/ubu-4.png)
 
-    ---
+   
 
 
 - Add Jenkins repository
@@ -123,7 +123,7 @@ echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
 sudo apt update -y
 sudo apt install jenkins -y
 ```
-  ![image](images/ubu7.png)
+  ![image](images/ubu-5.png)
 
   ---
   
