@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         HOST_PORT = '4000'
-        IMAGE_NAME = 'ritesh355/docker-jenkins-app'   // Replace with your Docker Hub repo
+        IMAGE_NAME = 'ritesh355/docker-jenkins-app'   // Docker Hub repo
     }
 
     stages {
@@ -28,14 +28,12 @@ pipeline {
 
         stage('Push to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                withDockerRegistry([credentialsId: 'dockerhub-creds', url: 'https://index.docker.io/v1/']) {
                     sh """
-                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                         docker tag docker-jenkins-app:latest ${IMAGE_NAME}:${BUILD_NUMBER}
                         docker tag docker-jenkins-app:latest ${IMAGE_NAME}:latest
                         docker push ${IMAGE_NAME}:${BUILD_NUMBER}
                         docker push ${IMAGE_NAME}:latest
-                        docker logout
                     """
                 }
             }
