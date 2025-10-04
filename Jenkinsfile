@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         HOST_PORT = '4000'
+        IMAGE_NAME = 'ritesh355/docker-jenkins-app'   // Replace with your Docker Hub repo
     }
 
     stages {
@@ -24,27 +25,20 @@ pipeline {
                 sh "docker run -d --name docker-jenkins-app -p ${HOST_PORT}:3000 docker-jenkins-app:latest"
             }
         }
-    }
 
-    post {
-    success {
-        emailext(
-            subject: "✅ Success: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-            body: "Build succeeded!\n\nURL: ${env.BUILD_URL}",
-            to: "riteshsingh86991@gmail.com",
-            from: "riteshsingh86991@gmail.com"
-        )
-    }
-        
-    failure {
-        emailext(
-            subject: "❌ Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-            body: "Build failed!\n\nURL: ${env.BUILD_URL}",
-            to: "riteshsingh86991@gmail.com",
-            from: "riteshsingh86991@gmail.com"
-        )
+        stage('Push to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                    sh """
+                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                        docker tag docker-jenkins-app:latest ${IMAGE_NAME}:${BUILD_NUMBER}
+                        docker tag docker-jenkins-app:latest ${IMAGE_NAME}:latest
+                        docker push ${IMAGE_NAME}:${BUILD_NUMBER}
+                        docker push ${IMAGE_NAME}:latest
+                        docker logout
+                    """
+                }
+            }
+        }
     }
 }
-
-}
-
