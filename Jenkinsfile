@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        HOST_PORT = '4000'  // Change if needed, or pass dynamically
+    }
+
     stages {
         stage('Clone') {
             steps {
@@ -19,10 +23,10 @@ pipeline {
         stage('Run Container') {
             steps {
                 script {
-                    // Stop & remove old container if running
+                    // Stop & remove old container if exists
                     sh 'docker stop docker-jenkins-app || true && docker rm docker-jenkins-app || true'
-                    // Run new container on port 4000
-                    sh 'docker run -d --name docker-jenkins-app -p 4000:3000 docker-jenkins-app:latest'
+                    // Run new container with dynamic host port
+                    sh "docker run -d --name docker-jenkins-app -p ${HOST_PORT}:3000 docker-jenkins-app:latest"
                 }
             }
         }
