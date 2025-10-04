@@ -95,7 +95,9 @@ This guide provides step-by-step instructions to launch an AWS EC2 instance, ins
  ```
 sudo apt update -y
 ```
-   ![image](images/ubu2.png)
+  ![image](images/ubu2.png)
+
+  ---
 
 
  - Install Java (Jenkins needs Java)
@@ -104,6 +106,8 @@ sudo apt install openjdk-17-jdk -y
 ```
  ![image](images/ubu3.png)
     ![image](images/ubu4.png)
+
+    ---
 
 
 - Add Jenkins repository
