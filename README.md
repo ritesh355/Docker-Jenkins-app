@@ -176,7 +176,7 @@ sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
 4. Install suggested plugins.
 
-    ![image](images/jenk33.png)
+    ![image](images/jenk3.png)
       ![image](images/jenk4.png)
 
 
